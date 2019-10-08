@@ -20,6 +20,7 @@ services:
     networks:
       - monitoring
     volumes:
+      - $PWD/influxdb.conf:/etc/influxdb/influxdb.conf:ro
       - influxdb-volume:/var/lib/influxdb
   
 networks: 
