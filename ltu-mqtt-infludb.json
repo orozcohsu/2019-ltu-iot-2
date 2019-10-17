@@ -2,7 +2,7 @@
     {
         "id": "e40961b1.ad649",
         "type": "tab",
-        "label": "ltu",
+        "label": "MQTT-To-DB",
         "disabled": false,
         "info": "嶺東教育訓練"
     },
@@ -14,11 +14,11 @@
         "topic": "ltu",
         "qos": "0",
         "broker": "8c79fe46.7b645",
-        "x": 101,
-        "y": 66,
+        "x": 103,
+        "y": 57,
         "wires": [
             [
-                "c773303.7246cd",
+                "9b7c9ca5.507648",
                 "45532942.586358"
             ]
         ]
@@ -28,11 +28,11 @@
         "type": "function",
         "z": "e40961b1.ad649",
         "name": "Parse message",
-        "func": "var msg433 = {};\nmsg.payload = msg.payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nvar parts433 = msg.payload.split(\";\");\n\nmsg433.p1 = parts433[0];\nmsg433.p2 = parts433[1];\nmsg433.name = parts433[2];\nfor (var i=3; i<parts433.length; i++) {\n    var keyvalue = parts433[i].split(\"=\");\n    if (keyvalue.length===2) {\n        msg433[keyvalue[0]] = keyvalue[1];\n    }\n}\n\nmsg.msg433 = msg433;\nmsg.topic=\"rflink\";\n\nreturn msg;\n\n/*\n\n// So firstly a generic means of getting incoming items into an object\n\nvar the433 = {};\nmsg.payload = msg.payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nnode.warn(msg.payload);\nvar parts433 = msg.payload.split(\";\");\n\nthe433.p1 = parts433[0];\nthe433.p2 = parts433[1];\nthe433.name = parts433[2];\n\nvar a = 3;\nwhile (a < parts433.length) {\n    var bits433 = parts433[a].split(\"=\");\n    switch (bits433[0]) {\n        case \"ID\": the433.id = bits433[1]; break;\n        case \"SWITCH\": the433.switch = bits433[1]; break;\n        case \"CMD\": the433.cmd = bits433[1]; break;\n        case \"SET_LEVEL\": the433.set_level = parseInt(bits433[1], 10); break;\n        case \"TEMP\": the433.temp = parseInt(bits433[1], 16) / 10; break;\n        case \"HUM\": the433.hum = parseInt(bits433[1], 10); break;\n        case \"BARO\": the433.baro = parseInt(bits433[1], 16); break;\n        case \"HSTATUS\": the433.hstatus = parseInt(bits433[1], 10); break;\n        case \"BFORECAST\": the433.bforecast = parseInt(bits433[1], 10); break;\n        case \"UV\": the433.uv = parseInt(bits433[1], 16); break;\n        case \"LUX\": the433.lux = parseInt(bits433[1], 16); break;\n        case \"BAT\": the433.bat = bits433[1]; break;\n        case \"RAIN\": the433.rain = parseInt(bits433[1], 16) / 10; break;\n        case \"RAIN\": the433.rainrate = parseInt(bits433[1], 16) / 10; break;\n        case \"WINSP\": the433.winsp = parseInt(bits433[1], 16) / 10; break;\n        case \"AWINSP\": the433.awinsp = parseInt(bits433[1], 16) / 10; break;\n        case \"WINGS\": the433.wings = parseInt(bits433[1], 16); break;\n        case \"WINDIR\": the433.windir = parseInt(bits433[1], 10); break;\n        case \"WINCHL\": the433.winchl = parseInt(bits433[1], 16); break;\n        case \"WINTMP\": the433.wintmp = parseInt(bits433[1], 16); break;\n        case \"CHIME\": the433.chime = parseInt(bits433[1], 10); break;\n        case \"SMOKEALERT\": the433.smokealert = bits433[1]; break;\n        case \"PIR\": the433.pir = bits433[1]; break;\n        case \"CO2\": the433.co2 = parseInt(bits433[1], 10); break;\n        case \"SOUND\": the433.sound = parseInt(bits433[1], 10); break;\n        case \"KWATT\": the433.kwatt = parseInt(bits433[1], 16); break;\n        case \"WATT\": the433.watt = parseInt(bits433[1], 16); break;\n        case \"CURRENT\": the433.current = parseInt(bits433[1], 10); break;\n        case \"CURRENT2\": the433.current2 = parseInt(bits433[1], 10); break;\n        case \"CURRENT3\": the433.current3 = parseInt(bits433[1], 10); break;\n        case \"DIST\": the433.dist = parseInt(bits433[1], 10); break;\n        case \"METER\": the433.meter = parseInt(bits433[1], 10); break;\n        case \"VOLT\": the433.volt = parseInt(bits433[1], 10); break;\n        case \"RGBW\": the433.rgbc = parseInt(bits433[1].substring(0, 2), 16);\n            the433.rgbw = parseInt(bits433[1].substring(2, 4), 16); break;\n    }\n    a++;\n}\n\n// SO - the above is general... here is my specific setup for temporarily displaying\n// the Acurite info\nif ((the433.p1 == \"20\") && (the433.name == \"Acurite\") && (the433.id == \"c826\")) {\n    if (typeof the433.temp !== 'undefined') temp = the433.temp;\n    if (typeof the433.hum !== 'undefined') hum = the433.hum;\n    if (typeof the433.bat !== 'undefined') bat = the433.bat;\n    if (typeof the433.rain !== 'undefined') rain = the433.rain;\n    if (typeof the433.winsp !== 'undefined') winsp = the433.winsp;\n    if (typeof the433.windir !== 'undefined') windir = the433.windir;\n\n    node.warn(\"Temperature: \" + temp + \"c\");\n    node.warn(\"Humidity: \" + hum + \"%\");\n    node.warn(\"Battery: \" + bat);\n    node.warn(\"Rain: \" + rain + \"mm\");\n    node.warn(\"Wind Speed: \" + winsp + \"km/h\");\n    node.warn(\"Wind Dir: \" + (windir * 22.5) + \" degrees\");\n}\n\n*/",
+        "func": "var msg433 = {};\nmsg.payload = msg.payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nvar parts433 = msg.payload.split(\";\");\n\nmsg433.p1 = parts433[0];\nmsg433.p2 = parts433[1];\nmsg433.name = parts433[2];\n\nfor (var i=3; i<parts433.length; i++) {\n    var keyvalue = parts433[i].split(\"=\");\n    if (keyvalue.length===2) {\n        msg433[keyvalue[0]] = keyvalue[1];\n    }\n}\n\nmsg.msg433 = msg433;\nmsg.topic=\"ltu\";\n\nreturn msg;\n\n/*\n\n// So firstly a generic means of getting incoming items into an object\n\nvar the433 = {};\nmsg.payload = msg.payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nnode.warn(msg.payload);\nvar parts433 = msg.payload.split(\";\");\n\nthe433.p1 = parts433[0];\nthe433.p2 = parts433[1];\nthe433.name = parts433[2];\n\nvar a = 3;\nwhile (a < parts433.length) {\n    var bits433 = parts433[a].split(\"=\");\n    switch (bits433[0]) {\n        case \"ID\": the433.id = bits433[1]; break;\n        case \"SWITCH\": the433.switch = bits433[1]; break;\n        case \"CMD\": the433.cmd = bits433[1]; break;\n        case \"SET_LEVEL\": the433.set_level = parseInt(bits433[1], 10); break;\n        case \"TEMP\": the433.temp = parseInt(bits433[1], 16) / 10; break;\n        case \"HUM\": the433.hum = parseInt(bits433[1], 10); break;\n        case \"BARO\": the433.baro = parseInt(bits433[1], 16); break;\n        case \"HSTATUS\": the433.hstatus = parseInt(bits433[1], 10); break;\n        case \"BFORECAST\": the433.bforecast = parseInt(bits433[1], 10); break;\n        case \"UV\": the433.uv = parseInt(bits433[1], 16); break;\n        case \"LUX\": the433.lux = parseInt(bits433[1], 16); break;\n        case \"BAT\": the433.bat = bits433[1]; break;\n        case \"RAIN\": the433.rain = parseInt(bits433[1], 16) / 10; break;\n        case \"RAIN\": the433.rainrate = parseInt(bits433[1], 16) / 10; break;\n        case \"WINSP\": the433.winsp = parseInt(bits433[1], 16) / 10; break;\n        case \"AWINSP\": the433.awinsp = parseInt(bits433[1], 16) / 10; break;\n        case \"WINGS\": the433.wings = parseInt(bits433[1], 16); break;\n        case \"WINDIR\": the433.windir = parseInt(bits433[1], 10); break;\n        case \"WINCHL\": the433.winchl = parseInt(bits433[1], 16); break;\n        case \"WINTMP\": the433.wintmp = parseInt(bits433[1], 16); break;\n        case \"CHIME\": the433.chime = parseInt(bits433[1], 10); break;\n        case \"SMOKEALERT\": the433.smokealert = bits433[1]; break;\n        case \"PIR\": the433.pir = bits433[1]; break;\n        case \"CO2\": the433.co2 = parseInt(bits433[1], 10); break;\n        case \"SOUND\": the433.sound = parseInt(bits433[1], 10); break;\n        case \"KWATT\": the433.kwatt = parseInt(bits433[1], 16); break;\n        case \"WATT\": the433.watt = parseInt(bits433[1], 16); break;\n        case \"CURRENT\": the433.current = parseInt(bits433[1], 10); break;\n        case \"CURRENT2\": the433.current2 = parseInt(bits433[1], 10); break;\n        case \"CURRENT3\": the433.current3 = parseInt(bits433[1], 10); break;\n        case \"DIST\": the433.dist = parseInt(bits433[1], 10); break;\n        case \"METER\": the433.meter = parseInt(bits433[1], 10); break;\n        case \"VOLT\": the433.volt = parseInt(bits433[1], 10); break;\n        case \"RGBW\": the433.rgbc = parseInt(bits433[1].substring(0, 2), 16);\n            the433.rgbw = parseInt(bits433[1].substring(2, 4), 16); break;\n    }\n    a++;\n}\n\n// SO - the above is general... here is my specific setup for temporarily displaying\n// the Acurite info\nif ((the433.p1 == \"20\") && (the433.name == \"Acurite\") && (the433.id == \"c826\")) {\n    if (typeof the433.temp !== 'undefined') temp = the433.temp;\n    if (typeof the433.hum !== 'undefined') hum = the433.hum;\n    if (typeof the433.bat !== 'undefined') bat = the433.bat;\n    if (typeof the433.rain !== 'undefined') rain = the433.rain;\n    if (typeof the433.winsp !== 'undefined') winsp = the433.winsp;\n    if (typeof the433.windir !== 'undefined') windir = the433.windir;\n\n    node.warn(\"Temperature: \" + temp + \"c\");\n    node.warn(\"Humidity: \" + hum + \"%\");\n    node.warn(\"Battery: \" + bat);\n    node.warn(\"Rain: \" + rain + \"mm\");\n    node.warn(\"Wind Speed: \" + winsp + \"km/h\");\n    node.warn(\"Wind Dir: \" + (windir * 22.5) + \" degrees\");\n}\n\n*/",
         "outputs": 1,
         "noerr": 0,
-        "x": 616,
-        "y": 97,
+        "x": 515,
+        "y": 110,
         "wires": [
             [
                 "6dee95b8.6ef82c"
@@ -44,11 +44,11 @@
         "type": "function",
         "z": "e40961b1.ad649",
         "name": "TEMP conversion",
-        "func": "if (msg.msg433.TEMP!==undefined) {\n    if (parseInt(msg.msg433.TEMP, 16) >= 0x8000) {\n        msg.msg433.TEMP = (parseInt(msg.msg433.TEMP, 16) & 0x7FFF) / 10 * -1;\n    } else {\n        msg.msg433.TEMP = parseInt(msg.msg433.TEMP, 16) / 10;\n    }\n} else msg.msg433.TEMP=-999.0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.TEMP });\nreturn msg;",
+        "func": "if (msg.msg433.TEMP!==undefined) {\n     msg.msg433.TEMP = parseInt(msg.msg433.TEMP);\n} else msg.msg433.TEMP=-999.0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.TEMP });\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 686,
-        "y": 155,
+        "x": 741,
+        "y": 109,
         "wires": [
             [
                 "7afe7037.54ce3"
@@ -63,8 +63,8 @@
         "func": "if (msg.msg433.HUM!==undefined) {\n    msg.msg433.HUM = parseInt(msg.msg433.HUM, 10);\n}\nelse msg.msg433.HUM=-999.0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.HUM });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 567,
-        "y": 222,
+        "x": 579,
+        "y": 191,
         "wires": [
             [
                 "7cb270d7.c88b1"
@@ -96,7 +96,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 439,
-        "y": 277,
+        "y": 263,
         "wires": [
             [
                 "1d9e07b2.0f0f58"
@@ -111,8 +111,8 @@
         "func": "if (msg.msg433.WINSP!==undefined) {\n    msg.msg433.WINSP = parseInt(msg.msg433.WINSP, 16) /10;\n} else msg.msg433.WINSP=0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.WINSP });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 701,
-        "y": 280,
+        "x": 702,
+        "y": 259,
         "wires": [
             [
                 "cd3cb6d2.640358"
@@ -127,8 +127,8 @@
         "func": "if (msg.msg433.WINGS!==undefined) {\n    msg.msg433.WINGS  = parseInt(msg.msg433.WINGS , 16)/10;\n}\nelse msg.msg433.WINGS=0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.WINGS });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 142,
-        "y": 333,
+        "x": 149,
+        "y": 337,
         "wires": [
             [
                 "47f9b92f.6ec698"
@@ -143,8 +143,8 @@
         "func": "if (msg.msg433.WINDIR!==undefined) {\n    msg.msg433.WINDIR  = parseInt(msg.msg433.WINDIR , 10) * 22.5;\n}\nelse msg.msg433.WINDIR=-999.0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.WINDIR });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 362,
-        "y": 341,
+        "x": 399,
+        "y": 336,
         "wires": [
             [
                 "b75fde7b.7dca"
@@ -159,8 +159,8 @@
         "func": "if (msg.msg433.SWITCH !==undefined) {\n    msg.msg433.SWITCH   = parseInt(msg.msg433.SWITCH  , 16);\n}\nelse msg.msg433.SWITCH=-999.0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.SWITCH });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 613,
-        "y": 341,
+        "x": 663,
+        "y": 337,
         "wires": [
             [
                 "84795aea.3a1228"
@@ -175,8 +175,8 @@
         "func": "if (msg.msg433.CHIME  !==undefined) {\n    msg.msg433.CHIME    = parseInt(msg.msg433.CHIME   , 16);\n} else msg.msg433.CHIME=-999.0;\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.CHIME });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 165,
-        "y": 421,
+        "x": 170,
+        "y": 428,
         "wires": [
             [
                 "3b4359cd.bb59b6"
@@ -202,8 +202,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 590.6328125,
-        "y": 428.3046875,
+        "x": 609.6328125,
+        "y": 417.3046875,
         "wires": [
             [
                 "508256b3.31cd68"
@@ -218,12 +218,14 @@
         "func": "msg.payload = {\n    name: msg.msg433.name,\n    temp: msg.msg433.TEMP,\n    wind: msg.msg433.WINSP,\n    gust: msg.msg433.WINGS,\n    direction: msg.msg433.WINDIR,\n    rain: msg.msg433.RAIN,\n    rainrate: msg.msg433.RAINRATE,\n    humidity: msg.msg433.HUM,\n    battery: msg.msg433.BAT\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 236,
-        "y": 550,
+        "x": 163,
+        "y": 533,
         "wires": [
             [
                 "21825ef.819c2a2",
-                "5efa8086.80091"
+                "eefb6ae8.6a6c1",
+                "4881ca91.3a5bd4",
+                "cb9d49fe.a5941"
             ]
         ]
     },
@@ -235,7 +237,7 @@
         "func": "if (msg.msg433.BAT === undefined) msg.msg433.BAT=\"\";\nnode.status({fill:\"blue\",shape:\"ring\",text: msg.msg433.BAT });\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 393,
+        "x": 399,
         "y": 420,
         "wires": [
             [
@@ -272,8 +274,8 @@
         "measurement": "stations",
         "precision": "s",
         "retentionPolicy": "",
-        "x": 753,
-        "y": 588,
+        "x": 731,
+        "y": 481,
         "wires": []
     },
     {
@@ -286,20 +288,20 @@
         "console": true,
         "tostatus": false,
         "complete": "payload",
-        "x": 390,
-        "y": 32,
+        "x": 294,
+        "y": 105,
         "wires": []
     },
     {
         "id": "e4a49fcb.e597f",
         "type": "function",
         "z": "e40961b1.ad649",
-        "name": "rnd",
-        "func": "rnd=Math.floor(Math.random()*(40-30))+100;\nrnd1=Math.floor(Math.random()*(60-50))+50;\nmsg.payload=\"20;02;DKW2012;ID=0043;TEMP=\"+rnd+\";HUM=\"+rnd1+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\n//msg.payload=\"20;02;DKW2012;ID=0043;TEMP=8010;HUM=57;WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\nreturn msg;",
+        "name": "Fake Data",
+        "func": "rnd=Math.floor(Math.random(10))+20;\nrnd1=Math.floor(Math.random(10))+50;\nmsg.payload=\"20;02;DKW2012;ID=0043;TEMP=\"+rnd+\";HUM=\"+rnd1+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 330,
-        "y": 155,
+        "x": 301,
+        "y": 176,
         "wires": [
             [
                 "c773303.7246cd"
@@ -307,17 +309,95 @@
         ]
     },
     {
-        "id": "5efa8086.80091",
+        "id": "eefb6ae8.6a6c1",
+        "type": "debug",
+        "z": "e40961b1.ad649",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 682.5,
+        "y": 540.7999877929688,
+        "wires": []
+    },
+    {
+        "id": "4881ca91.3a5bd4",
         "type": "function",
         "z": "e40961b1.ad649",
-        "name": "test",
-        "func": "msg.payload=msg.msg433.TEMP;\nreturn msg;",
+        "name": "Decode - FBX",
+        "func": "var code = msg.payload;\nmsg.payload = {};\nif (code.temp > 30) {\n  msg.payload.value1 = \"<br>IoT感測器告警，溫濕度過高!<br>現在數值:<br>溫度:\" + code.temp + \"<br>濕度:\" + code.humidity; \n  return msg;\n}\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 428,
-        "y": 657,
+        "x": 368,
+        "y": 580,
+        "wires": [
+            [
+                "5894aee5.0d4a6"
+            ]
+        ]
+    },
+    {
+        "id": "5894aee5.0d4a6",
+        "type": "http request",
+        "z": "e40961b1.ad649",
+        "name": "IFTTT-FBX",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/fbx/with/key/xcZVxzxyrW7sKhJCq3_PD",
+        "tls": "",
+        "x": 677,
+        "y": 632,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "b69e68ff.5c5e98",
+        "type": "http request",
+        "z": "e40961b1.ad649",
+        "name": "IFTTT-Line",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/line/with/key/xcZVxzxyrW7sKhJCq3_PD",
+        "tls": "",
+        "x": 606,
+        "y": 778,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb9d49fe.a5941",
+        "type": "function",
+        "z": "e40961b1.ad649",
+        "name": "Decode - Line",
+        "func": "var code = msg.payload;\nmsg.payload = {};\nif (code.temp > 30) {\n  msg.payload.value1 = \"<br>IoT感測器告警，溫濕度過高!\";\n  msg.payload.value2 = \"<br>溫度:\" + code.temp;\n  msg.payload.value3 = \"<br>濕度:\" + code.humidity;\n  return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 649,
+        "wires": [
+            [
+                "b69e68ff.5c5e98"
+            ]
+        ]
+    },
+    {
+        "id": "9b7c9ca5.507648",
+        "type": "function",
+        "z": "e40961b1.ad649",
+        "name": "Process MQTT",
+        "func": "msg.payload = msg.payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nvar parts433 = msg.payload.split(\"!\");\nnode.warn(parts433.length)\n//溫度;濕度\nif (parts433.length==2){\n  msg.payload = \"20;02;DKW2012;ID=0043;TEMP=\"+parts433[0]+\";HUM=\"+parts433[1]+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 317,
+        "y": 40,
+        "wires": [
+            [
+                "c773303.7246cd"
+            ]
         ]
     },
     {
@@ -345,10 +425,10 @@
         "id": "373fa459.54e07c",
         "type": "influxdb",
         "z": "",
-        "hostname": "192.168.43.196",
+        "hostname": "192.168.43.85",
         "port": "8086",
         "protocol": "http",
-        "database": "weather",
+        "database": "ltu",
         "name": "Weather",
         "usetls": false,
         "tls": ""

@@ -1,0 +1,126 @@
+[
+    {
+        "id": "46dd5188.a5f85",
+        "type": "tab",
+        "label": "Sensor-To-MQTT",
+        "disabled": false,
+        "info": "嶺東教育訓練"
+    },
+    {
+        "id": "ee419fe9.4b73b",
+        "type": "mqtt out",
+        "z": "46dd5188.a5f85",
+        "name": "ltu",
+        "topic": "ltu",
+        "qos": "0",
+        "retain": "",
+        "broker": "8c79fe46.7b645",
+        "x": 660,
+        "y": 237,
+        "wires": []
+    },
+    {
+        "id": "21dea89.bd47ad8",
+        "type": "inject",
+        "z": "46dd5188.a5f85",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 158,
+        "y": 128,
+        "wires": [
+            [
+                "19483cab.792033"
+            ]
+        ]
+    },
+    {
+        "id": "19483cab.792033",
+        "type": "function",
+        "z": "46dd5188.a5f85",
+        "name": "Fake Data",
+        "func": "msg.payload=\"55!99\"\nvar parts433 = msg.payload.split(\"!\");\nnode.warn(parts433.length)\n//溫度;濕度\nif (parts433.length==2){\n  msg.payload = \"20;02;DKW2012;ID=0043;TEMP=\"+parts433[0]+\";HUM=\"+parts433[1]+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 392,
+        "y": 197,
+        "wires": [
+            [
+                "ee419fe9.4b73b",
+                "e23970bf.46a3b8"
+            ]
+        ]
+    },
+    {
+        "id": "e23970bf.46a3b8",
+        "type": "debug",
+        "z": "46dd5188.a5f85",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 617,
+        "y": 85,
+        "wires": []
+    },
+    {
+        "id": "a88cd948.f3a338",
+        "type": "rpi-dht22",
+        "z": "46dd5188.a5f85",
+        "name": "",
+        "topic": "rpi-dht11",
+        "dht": "11",
+        "pintype": 1,
+        "pin": 4,
+        "x": 136,
+        "y": 288,
+        "wires": [
+            [
+                "19483cab.792033",
+                "316fc3a8.310cbc"
+            ]
+        ]
+    },
+    {
+        "id": "316fc3a8.310cbc",
+        "type": "debug",
+        "z": "46dd5188.a5f85",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 451,
+        "y": 332,
+        "wires": []
+    },
+    {
+        "id": "8c79fe46.7b645",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "soldier.cloudmqtt.com",
+        "port": "11488",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
