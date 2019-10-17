@@ -1,0 +1,73 @@
+[
+    {
+        "id": "ee3e7892.2fcde8",
+        "type": "tab",
+        "label": "restful",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "3d1e016.6dd0f7e",
+        "type": "http response",
+        "z": "ee3e7892.2fcde8",
+        "name": "http response",
+        "statusCode": "200",
+        "headers": {
+            "Content-Type": "text/html"
+        },
+        "x": 604,
+        "y": 168,
+        "wires": []
+    },
+    {
+        "id": "3c66b5d6.88077a",
+        "type": "template",
+        "z": "ee3e7892.2fcde8",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello World!</h1>\n    </body>\n</html>",
+        "output": "str",
+        "x": 416,
+        "y": 258,
+        "wires": [
+            [
+                "3d1e016.6dd0f7e"
+            ]
+        ]
+    },
+    {
+        "id": "f1831ea0.aec2f",
+        "type": "http in",
+        "z": "ee3e7892.2fcde8",
+        "name": "users",
+        "url": "/users",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 214,
+        "y": 109,
+        "wires": [
+            [
+                "3c66b5d6.88077a",
+                "d9527162.ff837"
+            ]
+        ]
+    },
+    {
+        "id": "d9527162.ff837",
+        "type": "debug",
+        "z": "ee3e7892.2fcde8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 480,
+        "y": 80,
+        "wires": []
+    }
+]
