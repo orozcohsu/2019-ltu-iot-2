@@ -202,8 +202,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 609.6328125,
-        "y": 417.3046875,
+        "x": 605.6328125,
+        "y": 412.3046875,
         "wires": [
             [
                 "508256b3.31cd68"
@@ -223,9 +223,9 @@
         "wires": [
             [
                 "21825ef.819c2a2",
-                "eefb6ae8.6a6c1",
                 "4881ca91.3a5bd4",
-                "cb9d49fe.a5941"
+                "cb9d49fe.a5941",
+                "eefb6ae8.6a6c1"
             ]
         ]
     },
@@ -274,8 +274,8 @@
         "measurement": "stations",
         "precision": "s",
         "retentionPolicy": "",
-        "x": 731,
-        "y": 481,
+        "x": 670,
+        "y": 484,
         "wires": []
     },
     {
@@ -288,8 +288,8 @@
         "console": true,
         "tostatus": false,
         "complete": "payload",
-        "x": 294,
-        "y": 105,
+        "x": 274.99998474121094,
+        "y": 104,
         "wires": []
     },
     {
@@ -297,11 +297,11 @@
         "type": "function",
         "z": "e40961b1.ad649",
         "name": "Fake Data",
-        "func": "rnd=Math.floor(Math.random(10))+20;\nrnd1=Math.floor(Math.random(10))+50;\nmsg.payload=\"20;02;DKW2012;ID=0043;TEMP=\"+rnd+\";HUM=\"+rnd1+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\nreturn msg;",
+        "func": "rnd=Math.floor(Math.random(10))+20;\nrnd1=Math.floor(Math.random(10))+50;\nmsg.payload = \"20;02;DKW2012;ID=0043;TEMP=\" + rnd + \";HUM=\" + rnd1 + \";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 301,
-        "y": 176,
+        "x": 291,
+        "y": 168,
         "wires": [
             [
                 "c773303.7246cd"
@@ -313,13 +313,13 @@
         "type": "debug",
         "z": "e40961b1.ad649",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 682.5,
-        "y": 540.7999877929688,
+        "complete": "payload",
+        "x": 670.5,
+        "y": 553.7999877929688,
         "wires": []
     },
     {
@@ -330,8 +330,8 @@
         "func": "var code = msg.payload;\nmsg.payload = {};\nif (code.temp > 30) {\n  msg.payload.value1 = \"<br>IoT感測器告警，溫濕度過高!<br>現在數值:<br>溫度:\" + code.temp + \"<br>濕度:\" + code.humidity; \n  return msg;\n}\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 368,
-        "y": 580,
+        "x": 359,
+        "y": 621,
         "wires": [
             [
                 "5894aee5.0d4a6"
@@ -362,8 +362,8 @@
         "ret": "txt",
         "url": "https://maker.ifttt.com/trigger/line/with/key/xcZVxzxyrW7sKhJCq3_PD",
         "tls": "",
-        "x": 606,
-        "y": 778,
+        "x": 637,
+        "y": 712,
         "wires": [
             []
         ]
@@ -376,8 +376,8 @@
         "func": "var code = msg.payload;\nmsg.payload = {};\nif (code.temp > 30) {\n  msg.payload.value1 = \"<br>IoT感測器告警，溫濕度過高!\";\n  msg.payload.value2 = \"<br>溫度:\" + code.temp;\n  msg.payload.value3 = \"<br>濕度:\" + code.humidity;\n  return msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "x": 370,
-        "y": 649,
+        "x": 347,
+        "y": 699,
         "wires": [
             [
                 "b69e68ff.5c5e98"

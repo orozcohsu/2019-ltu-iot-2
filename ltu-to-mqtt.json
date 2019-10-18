@@ -15,24 +15,24 @@
         "qos": "0",
         "retain": "",
         "broker": "8c79fe46.7b645",
-        "x": 660,
-        "y": 237,
+        "x": 810,
+        "y": 206.99998474121094,
         "wires": []
     },
     {
         "id": "21dea89.bd47ad8",
         "type": "inject",
         "z": "46dd5188.a5f85",
-        "name": "",
-        "topic": "",
+        "name": "手動輸入",
+        "topic": "ltu",
         "payload": "",
         "payloadType": "date",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 158,
-        "y": 128,
+        "x": 194.99998474121094,
+        "y": 111,
         "wires": [
             [
                 "19483cab.792033"
@@ -44,11 +44,11 @@
         "type": "function",
         "z": "46dd5188.a5f85",
         "name": "Fake Data",
-        "func": "msg.payload=\"55!99\"\nvar parts433 = msg.payload.split(\"!\");\nnode.warn(parts433.length)\n//溫度;濕度\nif (parts433.length==2){\n  msg.payload = \"20;02;DKW2012;ID=0043;TEMP=\"+parts433[0]+\";HUM=\"+parts433[1]+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\n}\nreturn msg;",
+        "func": "//判別資料來源\nif (msg.topic!='rpi-dht11'){\n  //手動寫死(溫度;濕度)\n  msg.payload=\"55!99\"\n}\n  \nvar parts433 = msg.payload.split(\"!\");\nnode.warn(parts433.length)\nif (parts433.length==2){\n  msg.payload = \"20;02;DKW2012;ID=0043;TEMP=\"+parts433[0]+\";HUM=\"+parts433[1]+\";WINSP=0031;WINGS=0049;RAIN=0c22;WINDIR=0004;BAT=OK;\"\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 392,
-        "y": 197,
+        "x": 519,
+        "y": 193.99998474121094,
         "wires": [
             [
                 "ee419fe9.4b73b",
@@ -66,8 +66,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 617,
-        "y": 85,
+        "x": 743,
+        "y": 72,
         "wires": []
     },
     {
@@ -77,14 +77,13 @@
         "name": "",
         "topic": "rpi-dht11",
         "dht": "11",
-        "pintype": 1,
+        "pintype": "0",
         "pin": 4,
-        "x": 136,
-        "y": 288,
+        "x": 318,
+        "y": 319,
         "wires": [
             [
-                "19483cab.792033",
-                "316fc3a8.310cbc"
+                "946054c1.5c3898"
             ]
         ]
     },
@@ -97,10 +96,47 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 451,
-        "y": 332,
+        "complete": "true",
+        "x": 794,
+        "y": 357,
         "wires": []
+    },
+    {
+        "id": "e76f067f.3e1d9",
+        "type": "inject",
+        "z": "46dd5188.a5f85",
+        "name": "trigger",
+        "topic": "ltu",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 148.49998474121094,
+        "y": 253,
+        "wires": [
+            [
+                "a88cd948.f3a338"
+            ]
+        ]
+    },
+    {
+        "id": "946054c1.5c3898",
+        "type": "function",
+        "z": "46dd5188.a5f85",
+        "name": "measures",
+        "func": "var temp = msg.payload;\nvar hum = msg.humidity;\nmsg.payload = temp + \"!\" + hum;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 533.5,
+        "y": 351.5999755859375,
+        "wires": [
+            [
+                "316fc3a8.310cbc",
+                "19483cab.792033"
+            ]
+        ]
     },
     {
         "id": "8c79fe46.7b645",
