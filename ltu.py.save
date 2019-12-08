@@ -1,0 +1,309 @@
+f = open("[
+    {
+        "id": "fc2cea26.6752b8",
+        "type": "tab",
+        "label": "Run Shell",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c77f37e.d81a3c8",
+        "type": "bigexec",
+        "z": "fc2cea26.6752b8",
+        "name": "",
+        "command": "sh",
+        "commandArgs": "-c '(echo stdout; echo stderr >&2)'",
+        "minError": 1,
+        "minWarning": 1,
+        "cwd": "",
+        "shell": false,
+        "extraArgumentProperty": "",
+        "envProperty": "",
+        "x": 725,
+        "y": 321,
+        "wires": [
+            [
+                "da5f1a59.23bf2"
+            ],
+            [
+                "ed436b28.979058"
+            ],
+            [
+                "9740179a.3e3e08"
+            ]
+        ]
+    },
+    {
+        "id": "8dbd5fe6.ef9b8",
+        "type": "debug",
+        "z": "fc2cea26.6752b8",
+        "name": "output",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 535,
+        "y": 521,
+        "wires": []
+    },
+    {
+        "id": "3be7f3a2.b35b44",
+        "type": "bigexec",
+        "z": "fc2cea26.6752b8",
+        "name": "true",
+        "command": "true",
+        "commandArgs": "",
+        "minError": 1,
+        "minWarning": "",
+        "cwd": "",
+        "shell": false,
+        "x": 235,
+        "y": 121,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3db62212.c482be",
+        "type": "bigexec",
+        "z": "fc2cea26.6752b8",
+        "name": "sh",
+        "command": "sh",
+        "commandArgs": "-c",
+        "minError": "8",
+        "minWarning": "1",
+        "cwd": "/tmp",
+        "shell": false,
+        "extraArgumentProperty": "",
+        "envProperty": "",
+        "format": "utf8",
+        "payloadIs": "argument",
+        "x": 675,
+        "y": 161,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b348683f.0bb89",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "",
+        "topic": "",
+        "payload": "\"exit 0\"",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 515,
+        "y": 121,
+        "wires": [
+            [
+                "3db62212.c482be"
+            ]
+        ]
+    },
+    {
+        "id": "7cd511e6.7a4ba8",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "",
+        "topic": "",
+        "payload": "\"exit 1\"",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 515,
+        "y": 161,
+        "wires": [
+            [
+                "3db62212.c482be"
+            ]
+        ]
+    },
+    {
+        "id": "a634eaf9.e888e",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "",
+        "topic": "",
+        "payload": "\"exit 8\"",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 515,
+        "y": 201,
+        "wires": [
+            [
+                "3db62212.c482be"
+            ]
+        ]
+    },
+    {
+        "id": "18852f88.bbbf6",
+        "type": "bigexec",
+        "z": "fc2cea26.6752b8",
+        "name": "sleep",
+        "command": "sleep",
+        "commandArgs": "",
+        "minError": "8",
+        "minWarning": "1",
+        "cwd": "/tmp",
+        "shell": true,
+        "extraArgumentProperty": "",
+        "envProperty": "",
+        "x": 235,
+        "y": 401,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e63d4f14.5c0df",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "",
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 75,
+        "y": 401,
+        "wires": [
+            [
+                "18852f88.bbbf6"
+            ]
+        ]
+    },
+    {
+        "id": "d3e59d1.1ca08e",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "True!",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 75,
+        "y": 121,
+        "wires": [
+            [
+                "3be7f3a2.b35b44"
+            ]
+        ]
+    },
+    {
+        "id": "9d7f31f6.cd1c08",
+        "type": "bigexec",
+        "z": "fc2cea26.6752b8",
+        "name": "false",
+        "command": "false",
+        "commandArgs": "",
+        "minError": 1,
+        "minWarning": "",
+        "cwd": "",
+        "shell": false,
+        "extraArgumentProperty": "",
+        "envProperty": "",
+        "x": 235,
+        "y": 201,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e7d51e8b.f804e8",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "False!",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 75,
+        "y": 201,
+        "wires": [
+            [
+                "9d7f31f6.cd1c08"
+            ]
+        ]
+    },
+    {
+        "id": "40c36d7e.0bafa4",
+        "type": "inject",
+        "z": "fc2cea26.6752b8",
+        "name": "Hello!",
+        "topic": "",
+        "payload": "Hello you!",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 79,
+        "y": 521,
+        "wires": [
+            [
+                "951f8c92.a261a8"
+            ]
+        ]
+    },
+    {
+        "id": "951f8c92.a261a8",
+        "type": "bigexec",
+        "z": "fc2cea26.6752b8",
+        "name": "echo",
+        "command": "echo",
+        "commandArgs": "",
+        "minError": 1,
+        "minWarning": "",
+        "cwd": "",
+        "shell": false,
+        "extraArgumentProperty": "",
+        "envProperty": "",
+        "format": "utf8",
+        "payloadIs": "argument",
+        "x": 235,
+        "y": 521,
+        "wires": [
+            [
+                "fc39bfc.79333c"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "fc39bfc.79333c",
+        "type": "function",
+        "z": "fc2cea26.6752b8",
+        "name": "toString()",
+        "func": "msg.payload = msg.payload.toString()\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 385,
+        "y": 521,
+        "wires": [
+            [
+                "8dbd5fe6.ef9b8"
+            ]
+        ]
+/ltu.txt", "a")
+f.write("This is ltu test in node-red!")
+f.close()
+
+print("OK! write to ltu.txt")
