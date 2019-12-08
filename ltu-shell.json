@@ -524,7 +524,7 @@
         "z": "fc2cea26.6752b8",
         "name": "Call Python",
         "command": "sh",
-        "commandArgs": "-c '(python /home/pi/ltu.py)'",
+        "commandArgs": "-c '(python /home/pi/2019-ltu-iot-2/ltu.py)'",
         "minError": 1,
         "minWarning": 1,
         "cwd": "",
